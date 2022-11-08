@@ -106,7 +106,7 @@ class Jawali extends JawaliAttributes
             );
 
             $response = new JawaliWalletAuthResponse((string)$response->getBody());
-            JawaliAuthHelper::setAuthToken($response->getAccessToken());
+            JawaliAuthHelper::setWalletToken($response->getAccessToken());
             return $response;
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             return new JawaliErrorResponse($e->getResponse()->getBody(), $e->getResponse()->getStatusCode());
