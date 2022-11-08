@@ -14,8 +14,18 @@ class JawaliAttributes extends Guzzle
     protected array $attributes = [];
 
     protected array $headers = [];
-    protected array $temp = [];
+    protected array $security = [];
 
+
+    /**
+     * for test purposes
+     * @return $this
+     */
+    public function disableVerify(): JawaliAttributes
+    {
+        $this->security['verify'] = false;
+        return $this;
+    }
 
     /**
      * @param $id

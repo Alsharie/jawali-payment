@@ -82,9 +82,8 @@ class Guzzle
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    protected function sendRequest($path, $attributes, $headers, string $method = 'POST'): ResponseInterface
+    protected function sendRequest($path, $attributes, $headers, $security=[], string $method = 'POST'): ResponseInterface
     {
-
 
         return $this->guzzleClient->request(
             $method,
@@ -97,8 +96,9 @@ class Guzzle
                     $headers
                 ),
                 'json' => $attributes,
+                ...$security
             ]
-        )->ha;
+        );
     }
 
 

@@ -4,11 +4,9 @@ namespace Alsharie\JawaliPayment;
 
 
 use Alsharie\JawaliPayment\Helpers\JawaliAuthHelper;
-use Alsharie\JawaliPayment\Responses\JawaliConfirmPaymentResponse;
 use Alsharie\JawaliPayment\Responses\JawaliErrorResponse;
 use Alsharie\JawaliPayment\Responses\JawaliInitPaymentResponse;
 use Alsharie\JawaliPayment\Responses\JawaliLoginResponse;
-use Alsharie\JawaliPayment\Responses\JawaliOperationStatusResponse;
 use Alsharie\JawaliPayment\Responses\JawaliWalletAuthResponse;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -18,6 +16,7 @@ class Jawali extends JawaliAttributes
 
     public function __construct()
     {
+        parent::__construct();
         $this->attributes['header'] = [
             "serviceDetail" => [
                 "domainName" => "WalletDomain",
@@ -74,6 +73,7 @@ class Jawali extends JawaliAttributes
                 $this->getLoginPath(),
                 $this->attributes,
                 $this->headers,
+                $this->security,
             );
 
             $response = new JawaliLoginResponse((string)$response->getBody());
@@ -103,6 +103,7 @@ class Jawali extends JawaliAttributes
                 $this->getWalletPath(),
                 $this->attributes,
                 $this->headers,
+                $this->security,
             );
 
             $response = new JawaliWalletAuthResponse((string)$response->getBody());
@@ -133,6 +134,7 @@ class Jawali extends JawaliAttributes
                 $this->getWalletPath(),
                 $this->attributes,
                 $this->headers,
+                $this->security,
             );
 
             return new JawaliInitPaymentResponse((string)$response->getBody());
