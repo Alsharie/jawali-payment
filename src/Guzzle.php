@@ -43,7 +43,7 @@ class Guzzle
                 $retries,
                 \GuzzleHttp\Psr7\Request $request,
                 \GuzzleHttp\Psr7\Response $response = null,
-                \GuzzleHttp\Exception\RequestException $exception = null
+                 $exception = null
             ) {
                 $maxRetries = 5;
 
