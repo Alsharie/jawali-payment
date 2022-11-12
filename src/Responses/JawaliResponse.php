@@ -52,7 +52,9 @@ class JawaliResponse
 
     public function responseBody($attr = null)
     {
-        if (isset($this->data['responseBody'])) {
+        if (isset($this->data[$attr])) {
+            return $this->data[$attr];
+        } else if (isset($this->data['responseBody'])) {
             if ($attr == null)
                 return $this->data['responseBody'];
 

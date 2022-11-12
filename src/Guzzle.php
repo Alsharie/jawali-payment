@@ -36,6 +36,9 @@ class Guzzle
      */
     public function __construct()
     {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $stack = new HandlerStack();
         $stack->setHandler(Utils::chooseHandler());
         $stack->push(\GuzzleHttp\Middleware::retry(
@@ -43,7 +46,7 @@ class Guzzle
                 $retries,
                 \GuzzleHttp\Psr7\Request $request,
                 \GuzzleHttp\Psr7\Response $response = null,
-                 $exception = null
+                $exception = null
             ) {
                 $maxRetries = 5;
 
@@ -53,10 +56,21 @@ class Guzzle
 
                 if ($response && $response->getStatusCode() === 401) {
                     // received 401, so we need to refresh the token
-                    // this should call your custom function that requests a new token and stores it somewhere (cache)
                     $jawali = new Jawali;
                     $jawali->login();
                     return true;
+                }
+
+                if ($response && $response->getStatusCode() === 200) {
+
+                    // received 200, but the wallet token is invalid
+                    $needle = 'invalid access token';
+                    if (strpos(strtolower($response->getBody()->getContents()), $needle) !== false) {
+                        $jawali = new Jawali;
+                        $jawali->walletAuth();
+                        return true;
+                    }
+
                 }
 
                 return false;
@@ -80,8 +94,11 @@ class Guzzle
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    protected function sendRequest($path, $attributes, $headers, $security = [], string $method = 'POST'): ResponseInterface
+    protected function sendRequest($path, $attributes, $headers, $security = [], string $request_type = 'json', string $method = 'POST'): ResponseInterface
     {
+
+        if ($request_type == 'json')
+            $headers['Content-Type'] = 'application/json';
 
         return $this->guzzleClient->request(
             $method,
@@ -90,7 +107,7 @@ class Guzzle
                 'headers' => array_merge(
                     $headers
                 ),
-                'form_params' => $attributes,
+                $request_type => $attributes,
                 ...$security
             ]
         );

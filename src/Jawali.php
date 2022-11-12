@@ -74,6 +74,7 @@ class Jawali extends JawaliAttributes
                 $this->attributes,
                 $this->headers,
                 $this->security,
+                'form_params'
             );
 
             $response = new JawaliLoginResponse((string)$response->getBody());
@@ -144,7 +145,6 @@ class Jawali extends JawaliAttributes
             return new JawaliErrorResponse(json_encode(['message' => $e->getMessage()]), $e->getCode());
         }
     }
-
 
 
 }
