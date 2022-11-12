@@ -5,7 +5,6 @@ namespace Alsharie\JawaliPayment;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\ResponseInterface;
 
@@ -65,8 +64,7 @@ class Guzzle
         ));
 
 
-
-        $this->guzzleClient =new Client([
+        $this->guzzleClient = new Client([
             'handler' => $stack,
         ]);
         $this->basePath = config('jawali.url.base');
@@ -82,7 +80,7 @@ class Guzzle
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    protected function sendRequest($path, $attributes, $headers, $security=[], string $method = 'POST'): ResponseInterface
+    protected function sendRequest($path, $attributes, $headers, $security = [], string $method = 'POST'): ResponseInterface
     {
 
         return $this->guzzleClient->request(
@@ -90,12 +88,9 @@ class Guzzle
             $path,
             [
                 'headers' => array_merge(
-                    [
-                        'Content-Type' => 'application/json',
-                    ],
                     $headers
                 ),
-                'json' => $attributes,
+                'form_params' => $attributes,
                 ...$security
             ]
         );
@@ -104,7 +99,7 @@ class Guzzle
 
     protected function getLoginPath(): string
     {
-        return $this->basePath . '/' . "api/user-ms/v1/login";
+        return $this->basePath . '/' . "oauth/token";
     }
 
 
@@ -112,7 +107,6 @@ class Guzzle
     {
         return $this->basePath . '/' . "v1/ws/callWS";
     }
-
 
 
 }
