@@ -12,6 +12,11 @@ class JawaliEcommerceInquiryResponse extends JawaliResponse
         return $this->responseBody('txnamount');
     }
 
+    public function getState($attr = null)
+    {
+        return $this->responseBody('state');
+    }
+
 
     public function getTransactionRef($attr = null)
     {
