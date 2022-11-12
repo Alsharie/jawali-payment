@@ -64,8 +64,10 @@ class Guzzle
                 if ($response && $response->getStatusCode() === 200) {
 
                     // received 200, but the wallet token is invalid
-                    $needle = 'invalid access token';
-                    if (strpos(strtolower($response->getBody()->getContents()), $needle) !== false) {
+                    $invalid = 'invalid access token';
+                    $expired = 'access token expired';
+                    if (strpos(strtolower($response->getBody()->getContents()), $invalid) !== false
+                        || strpos(strtolower($response->getBody()->getContents()), $expired) !== false) {
                         $jawali = new Jawali;
                         $jawali->walletAuth();
                         return true;
