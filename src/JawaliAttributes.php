@@ -28,6 +28,28 @@ class JawaliAttributes extends Guzzle
     }
 
     /**
+     * @param $voucher
+     * @return JawaliAttributes
+     */
+    public function setVoucher($voucher): JawaliAttributes
+    {
+        $this->attributes['voucher'] = $voucher;
+        return $this;
+    }
+
+    /**
+     * set receiver mobile when refund
+     * @param $phone
+     * @return JawaliAttributes
+     */
+    public function setReceiverMobile($phone): JawaliAttributes
+    {
+        $this->attributes['receiverMobile'] = $phone;
+        return $this;
+    }
+
+
+    /**
      * @param $id
      * @return JawaliAttributes
      */

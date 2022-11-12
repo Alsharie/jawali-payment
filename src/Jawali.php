@@ -4,8 +4,9 @@ namespace Alsharie\JawaliPayment;
 
 
 use Alsharie\JawaliPayment\Helpers\JawaliAuthHelper;
+use Alsharie\JawaliPayment\Responses\JawaliEcommcaShoutResponse;
+use Alsharie\JawaliPayment\Responses\JawaliEcommerceInquiryResponse;
 use Alsharie\JawaliPayment\Responses\JawaliErrorResponse;
-use Alsharie\JawaliPayment\Responses\JawaliInitPaymentResponse;
 use Alsharie\JawaliPayment\Responses\JawaliLoginResponse;
 use Alsharie\JawaliPayment\Responses\JawaliWalletAuthResponse;
 use GuzzleHttp\Exception\GuzzleException;
@@ -119,7 +120,7 @@ class Jawali extends JawaliAttributes
 
     /**
      * It Is used to allow the merchant to initiate a payment for a specific customer.
-     * @return JawaliInitPaymentResponse|JawaliErrorResponse
+     * @return JawaliEcommerceInquiryResponse|JawaliErrorResponse
      */
     public function ecommerceInquiry()
     {
@@ -138,7 +139,33 @@ class Jawali extends JawaliAttributes
                 $this->security,
             );
 
-            return new JawaliInitPaymentResponse((string)$response->getBody());
+            return new JawaliEcommerceInquiryResponse((string)$response->getBody());
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new JawaliErrorResponse($e->getResponse()->getBody(), $e->getResponse()->getStatusCode());
+        } catch (GuzzleException $e) {
+            return new JawaliErrorResponse(json_encode(['message' => $e->getMessage()]), $e->getCode());
+        }
+    }
+
+    /**
+     * It Is used to allow the merchant to initiate a payment for a specific customer.
+     * @return JawaliEcommcaShoutResponse|JawaliErrorResponse
+     */
+    public function ecommcaShout()
+    {
+        $this->setAuthorization();
+        $this->setWalletAuthAttributes();
+        $this->setServiceScope('PAYAG.ECOMMCASHOUT');
+
+        try {
+            $response = $this->sendRequest(
+                $this->getWalletPath(),
+                $this->attributes,
+                $this->headers,
+                $this->security,
+            );
+
+            return new JawaliEcommcaShoutResponse((string)$response->getBody());
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             return new JawaliErrorResponse($e->getResponse()->getBody(), $e->getResponse()->getStatusCode());
         } catch (GuzzleException $e) {
