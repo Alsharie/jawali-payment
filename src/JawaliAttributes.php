@@ -33,7 +33,7 @@ class JawaliAttributes extends Guzzle
      */
     public function setVoucher($voucher): JawaliAttributes
     {
-        $this->attributes['voucher'] = $voucher;
+        $this->attributes['body']['voucher'] = $voucher;
         return $this;
     }
 
@@ -44,7 +44,7 @@ class JawaliAttributes extends Guzzle
      */
     public function setReceiverMobile($phone): JawaliAttributes
     {
-        $this->attributes['receiverMobile'] = $phone;
+        $this->attributes['body']['receiverMobile'] = $phone;
         return $this;
     }
 
@@ -55,7 +55,7 @@ class JawaliAttributes extends Guzzle
      */
     public function setRefId($id): JawaliAttributes
     {
-        $this->attributes['refId'] = $id;
+        $this->attributes['body']['refId'] = $id;
         return $this;
     }
 
@@ -66,7 +66,7 @@ class JawaliAttributes extends Guzzle
      */
     public function setIssuerRef($ref): JawaliAttributes
     {
-        $this->attributes['issuerRef'] = $ref;
+        $this->attributes['body']['issuerRef'] = $ref;
         return $this;
     }
 
@@ -77,7 +77,7 @@ class JawaliAttributes extends Guzzle
      */
     public function setAmount($amount): JawaliAttributes
     {
-        $this->attributes['amount'] = $amount;
+        $this->attributes['body']['amount'] = $amount;
         return $this;
     }
 
@@ -89,7 +89,7 @@ class JawaliAttributes extends Guzzle
      */
     public function setNote($note): JawaliAttributes
     {
-        $this->attributes['purpose'] = $note;
+        $this->attributes['body']['purpose'] = $note;
         return $this;
     }
 
@@ -100,7 +100,7 @@ class JawaliAttributes extends Guzzle
      */
     public function setPurpose($note): JawaliAttributes
     {
-        $this->attributes['purpose'] = $note;
+        $this->attributes['body']['purpose'] = $note;
         return $this;
     }
 
@@ -228,6 +228,5 @@ class JawaliAttributes extends Guzzle
     {
         $this->headers['Authorization'] = 'bearer ' . JawaliAuthHelper::getAuthToken();
     }
-
-
+    
 }
