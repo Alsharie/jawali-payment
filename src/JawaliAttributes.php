@@ -208,6 +208,13 @@ class JawaliAttributes extends Guzzle
     {
         $this->attributes['header']['serviceDetail']['serviceName'] = $service;
     }
+    /**
+     * @return void
+     */
+    protected function setServiceDomain($domain)
+    {
+        $this->attributes['header']['serviceDetail']['domainName'] = $domain;
+    }
 
     /**
      * @return void
@@ -228,5 +235,5 @@ class JawaliAttributes extends Guzzle
     {
         $this->headers['Authorization'] = 'bearer ' . JawaliAuthHelper::getAuthToken();
     }
-    
+
 }

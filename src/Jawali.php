@@ -127,9 +127,8 @@ class Jawali extends JawaliAttributes
         $this->setAuthorization();
         $this->setWalletAuthAttributes();
         $this->setServiceScope('PAYAG.ECOMMERCEINQUIRY');
-        if (!isset($this->attributes['CurrencyId'])) {
-            $this->attributes['CurrencyId'] = 2;//rial Yemeni
-        }
+        $this->setServiceDomain('MerchantDomain');
+
 
         try {
             $response = $this->sendRequest(
@@ -156,6 +155,7 @@ class Jawali extends JawaliAttributes
         $this->setAuthorization();
         $this->setWalletAuthAttributes();
         $this->setServiceScope('PAYAG.ECOMMCASHOUT');
+        $this->setServiceDomain('MerchantDomain');
 
         try {
             $response = $this->sendRequest(
