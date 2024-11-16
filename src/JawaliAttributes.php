@@ -37,6 +37,13 @@ class JawaliAttributes extends Guzzle
         return $this;
     }
 
+    //set currency
+    public function setCurrency($currency): JawaliAttributes
+    {
+        $this->attributes['body']['currency'] = $currency;
+        return $this;
+    }
+
     /**
      * set receiver mobile when refund
      * @param $phone
@@ -197,7 +204,6 @@ class JawaliAttributes extends Guzzle
     {
         $this->attributes['body']['agentWallet'] = config('jawali.auth.wallet');
         $this->attributes['body']['password'] = config('jawali.auth.wallet_password');
-        $this->attributes['body']['receiverMobile'] = config('jawali.auth.phone');
         $this->attributes['body']['accessToken'] = JawaliAuthHelper::getWalletToken();
     }
 

@@ -58,6 +58,7 @@ class Guzzle
                     // received 401, so we need to refresh the token
                     $jawali = new Jawali;
                     $jawali->login();
+                    $jawali->walletAuth();
                     return true;
                 }
 
