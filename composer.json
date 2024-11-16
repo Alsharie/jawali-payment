@@ -1,32 +1,32 @@
 {
-    "name": "alsharie/jawali-payment",
-    "description": "Jawali payment gateway",
-    "type": "library",
-    "license": "MIT",
-    "require": {
-        "php": ">=7.4",
-        "guzzlehttp/guzzle": "^7.5",
-        "illuminate/support": "^9.33"
-    },
-    "autoload": {
-        "psr-4": {
-            "Alsharie\\JawaliPayment\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Alsharie",
-            "email": "abdulrahman.alsharie@gmail.com"
-        }
-    ],
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Alsharie\\JawaliPayment\\JawaliServiceProvider"
-            ],
-            "aliases": {
-                "JawaliPayment": "JawaliPayment"
-            }
-        }
+  "name": "alsharie/jawali-payment",
+  "description": "Jawali payment gateway",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.4",
+    "guzzlehttp/guzzle": "^7.5",
+    "illuminate/support": "^9.33 || ^10.0 || *"
+  },
+  "autoload": {
+    "psr-4": {
+      "Alsharie\\JawaliPayment\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "Alsharie",
+      "email": "abdulrahman.alsharie@gmail.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Alsharie\\JawaliPayment\\JawaliServiceProvider"
+      ],
+      "aliases": {
+        "JawaliPayment": "JawaliPayment"
+      }
+    }
+  }
 }
